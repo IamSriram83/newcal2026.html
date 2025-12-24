@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2026 Calendar</title>
+    <center><img src="SUVARNA LAKSHMI-Company.png" width="500px"></center>
+    <style>
+        :root { --primary: #d35400; --bg: #f9f9f9; --text: #2c3e50; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
+        .container { max-width: 1200px; margin: auto; }
+        h1 { text-align: center; color: var(--primary); }
+        .month-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .month { background: white; border-radius: 8px; padding: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-top: 5px solid var(--primary); }
+        .month-name { text-align: center; font-size: 1.4em; font-weight: bold; margin-bottom: 10px; }
+        .days-header, .days-grid { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 0.85em; }
+        .days-header div { font-weight: bold; color: #7f8c8d; padding-bottom: 5px; }
+        .day { padding: 10px 2px; border-radius: 4px; position: relative; min-height: 50px; border: 1px solid #f2f2f2; }
+        .day-num { font-weight: bold; display: block; }
+        .lunar-tithi { font-size: 0.7em; color: #95a5a6; display: block; }
+        .festival-indicator { font-size: 0.65em; color: var(--primary); font-weight: bold; line-height: 1.1; margin-top: 3px; display: block; }
+        .sunday { color: #e74c3c; }
+        .empty { border: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>2026 Calendar</h1>
+        <div class="month-grid" id="calendar"></div>
+    </div>
+
+    <script>
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        // Festival data for 2026 [Month Index (0-11)-Day]
+        const festivals = {
+            "0-1": "New Year", "0-14": "Makar Sankranti/Pongal", "0-26": "Republic Day",
+            "1-15": "Maha Shivaratri", "2-3": "Holika Dahan", "2-4": "Holi", 
+            "2-19": "Ugadi/Gudi Padwa", "2-26": "Ram Navami", "3-2": "Hanuman Jayanti",
+            "3-14": "Ambedkar Jayanti", "4-1": "Buddha Purnima", "6-16": "Jagannath Rath Yatra",
+            "7-15": "Independence Day", "7-28": "Raksha Bandhan", "8-4": "Janmashtami",
+            "8-14": "Ganesh Chaturthi", "9-2": "Gandhi Jayanti", "9-20": "Dussehra",
+            "10-8": "Diwali", "10-10": "Govardhan Puja", "10-11": "Bhai Dooj", "11-25": "Christmas"
+        };
+
+        const renderCalendar = () => {
+            const container = document.getElementById('calendar');
+            months.forEach((month, mIdx) => {
+                const monthDiv = document.createElement('div');
+                monthDiv.className = 'month';
+                monthDiv.innerHTML = `<div class="month-name">${month} 2026</div>`;
+                
+                const header = document.createElement('div');
+                header.className = 'days-header';
+                ["S", "M", "T", "W", "T", "F", "S"].forEach(d => header.innerHTML += `<div>${d}</div>`);
+                monthDiv.appendChild(header);
+
+                const grid = document.createElement('div');
+                grid.className = 'days-grid';
+                
+                const firstDay = new Date(2026, mIdx, 1).getDay();
+                const totalDays = new Date(2026, mIdx + 1, 0).getDate();
+
+                for (let i = 0; i < firstDay; i++) grid.innerHTML += `<div class="day empty"></div>`;
+
+                for (let day = 1; day <= totalDays; day++) {
+                    const festKey = `${mIdx}-${day}`;
+                    const fest = festivals[festKey] ? `<span class="festival-indicator">${festivals[festKey]}</span>` : '';
+                    const isSun = (new Date(2026, mIdx, day).getDay() === 0) ? 'sunday' : '';
+                    
+                    grid.innerHTML += `
+                        <div class="day ${isSun}">
+                            <span class="day-num">${day}</span>
+                            <span class="lunar-tithi">Tithi ${day % 15 || 15}</span>
+                            ${fest}
+                        </div>`;
+                }
+                monthDiv.appendChild(grid);
+                container.appendChild(monthDiv);
+            });
+        };
+        renderCalendar();
+    </script>
+</body>
+</html>
