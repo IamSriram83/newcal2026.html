@@ -1,1 +1,19 @@
-# newcal2026.html
+<html>
+  <head>
+  <title>
+    SUVARNA LAKSHMI CO.
+  </title>
+  </head>
+  <body>
+    <th>SUN</th>
+    <th>MON</th>
+    <th>TUE</th>
+    <th>WED</th>
+    <th>THU</th>
+    <th>FRI</th>
+    <th>SAT</th>
+    <tr>
+      <td><b>1</b></td><td><b>2</b></td><td><b>3</b><b>4</b></td>
+    </tr>
+  </body>
+</html>
