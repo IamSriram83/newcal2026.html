@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>2026 Calendar</title>
+    <title></title>
     <center><img src="SUVARNA LAKSHMI-Company.png" width="500px"></center>
     <style>
         :root { --primary: #d35400; --bg: #f9f9f9; --text: #2c3e50; }
